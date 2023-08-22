@@ -5,7 +5,7 @@ const Navbar = () => {
 
     return(
         <div className="w-screen h-screen overflow-auto flex flex-col flex-nowrap">
-            <div className="w-full m-0 flex h-14 text-black text-lg font-semibold justify-center items-center shadow-lg z-10">
+            <div className="w-full m-0 flex h-14 text-black text-lg font-semibold justify-center items-center shadow-lg z-10 shrink-0">
                 <div className="w-[85%] h-full flex justify-between items-center">
                     <div className="w-fit h-full flex items-center p-1">
                         logo
