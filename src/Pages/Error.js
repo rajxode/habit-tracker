@@ -1,13 +1,11 @@
 
 
-const DetailsPage = () => {
+export const Error = () => {
     return(
         <div>
             <h1>
-                Details
+                Error
             </h1>
         </div>
     )
 }
-
-export default DetailsPage;
