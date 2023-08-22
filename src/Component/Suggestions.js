@@ -1,4 +1,5 @@
 
+import { habits } from "../Data/Habits";
 import ListItem from "./ListItem";
 
 
@@ -14,7 +15,8 @@ const Suggestions = () => {
             </nav>
 
             <div className="w-full flex flex-col h-fill p-2 overflow-auto">
-
+                {habits.map((habit) => <ListItem key={1}
+                                                habit={habit} />)} 
             </div>
             
         </>
