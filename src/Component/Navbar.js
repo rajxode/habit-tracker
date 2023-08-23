@@ -16,20 +16,22 @@ const Navbar = () => {
                 <div className="w-[95%] sm:w-[85%] h-full flex justify-between items-center flex-wrap">
                     
                     <div className="w-fit h-full flex items-center p-1 overflow-hidden">
-                        <img src={require('../Assets/logo.png')} alt="logo" className="w-24"/>
+                        <NavLink to="/">
+                            <img src={require('../Assets/logo.png')} alt="logo" className="w-24 mt-2"/>
+                        </NavLink>
                     </div>
 
                     <div className="hidden w-fit h-full sm:flex items-center">
                         <ul>
-                            <li className="inline-block mx-2">
-                                <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248);" } : undefined)}
+                            <li className="inline-block mx-2 text-slate-400">
+                                <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248)" } : undefined)}
                                         to='/'>
                                     Home
                                 </NavLink>
                             </li>
 
-                            <li className="inline-block mx-2">
-                                <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248);" } : undefined)}
+                            <li className="inline-block mx-2 text-slate-400">
+                                <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248)" } : undefined)}
                                         to='/detailspage'>
                                     Details
                                 </NavLink>
@@ -42,21 +44,23 @@ const Navbar = () => {
                     </button>
 
                     {showMenu?
-                        <div className="block sm:hidden w-full h-fit bg-white p-1 rounded-b">
+                        <div className="block sm:hid den w-full h-fit bg-white p-1 rounded-b shadow-md border-x-2 border-b-2">
                             <ul className="mx-0 px-1">
-                                <li className="border-b p-1">
-                                    <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248);" } : undefined)}
+
+                                <li className="border-b p-1 text-slate-400">
+                                    <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248)" } : undefined)}
                                             to='/'>
                                         Home
                                     </NavLink>
                                 </li>
 
-                                <li className="p-1">
+                                <li className="p-1 text-slate-400">
                                     <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248)" } : undefined)}
                                                 to='/detailspage'>
                                         Details
                                     </NavLink>
                                 </li>
+                                
                             </ul> 
                         </div>    
                         :
