@@ -1,10 +1,15 @@
+import { useDispatch } from "react-redux";
+import { setShowStatus } from "../Redux/Reducer/habitReducer";
+
+
 
 
 const HabitListItem = (props) => {
+    const dispatch = useDispatch();
     const {name,completedDays,url} = props.habit;
 
     const handleClick = () => {
-
+        dispatch(setShowStatus(props.habit));
     }
 
     return(
