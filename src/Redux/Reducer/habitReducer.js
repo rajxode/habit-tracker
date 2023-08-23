@@ -5,15 +5,7 @@ const initialState = { habits:[],
                     quote:{},
                     suggestionSelected:null,
                     showStatus:null,
-                    weekStatus : [
-                        {},
-                        {},
-                        {},
-                        {},
-                        {},
-                        {},
-                        {},
-                    ] 
+                    weekStatus : [null,null,null,null,null,null,null] 
                 }
 
 

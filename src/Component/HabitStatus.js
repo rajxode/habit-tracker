@@ -1,24 +1,34 @@
 
 import { NavLink } from "react-router-dom";
-import { habitSelector } from "../Redux/Reducer/habitReducer";
-import { useSelector } from "react-redux";
+import { habitSelector, setShowStatus } from "../Redux/Reducer/habitReducer";
+import { useDispatch, useSelector } from "react-redux";
+import SingleDayStatus from "./SingleDayStatus";
+
+const CalculateDayOfWeek = (date) => {
+    var days = new Array();
+    for (var i = 6; i >= 0; i--){
+        days[6-i] = new Date(date.getFullYear(), date.getMonth(), date.getDate() - i).toString();
+        days[6-i] = `${days[6-i].slice(0,4)}, ${days[6-i].slice(4,15)}`;
+    }
+    return days;
+}
+
 
 const HabitStatus = () => {
+    const dispatch = useDispatch();
     const { habits, showStatus } = useSelector(habitSelector);
+    const weekDays = CalculateDayOfWeek(new Date());
 
-    const CalculateDayOfWeek = (date) => {
-        var days = new Array();
-        for (var i = 0; i < 7; i++){
-            days[i] = new Date(date.getFullYear(), date.getMonth(), date.getDate() - i);
-        }
-        return days;
+    const handleCloseClick = (e) => {
+        e.preventDefault();
+        dispatch(setShowStatus(null));
     }
 
     return(
         <div className="w-2/3 h-full ml-1 flex flex-col p-1">
             <nav className="w-full p-1">
                 <NavLink to="/">
-                    <button className="bg-indigo-300 hover:bg-indigo-500 float-right p-1 rounded text-white">
+                    <button className="bg-indigo-400 hover:bg-indigo-500 float-right p-1 rounded text-white">
                         New Habit
                     </button>
                 </NavLink>
@@ -44,21 +54,32 @@ const HabitStatus = () => {
                 <div className="w-full ">
                     {
                         showStatus ?
-                            <div className="w-full p-1">
+                            <div className="w-full p-1 h-full">
+                                <button className="float-left bg-red-500 text-white px-[5px] rounded-md"
+                                        onClick={handleCloseClick}>
+                                            X
+                                </button>
+
                                 <h1 className="text-center text-2xl text-indigo-600 font-semibold">
                                     <span className="text-black">Habit:</span> {showStatus.name}
                                 </h1>
+
 
                                 <h1 className="text-right text-md font-semibold text-stone-500">
                                     <span>Added On:</span> {showStatus.createdOn}
                                 </h1>
 
-                                <div className="w-full">
-                                    
+                                <div className="w-full h-fill mt-[5%] bg-fixed overflow-scroll">
+                                    <h1 className="w-full text-center text-lg font-semibold">Your Weekly Progress:</h1>
+                                    <div className="w-full h-full p-2 flex flex-row justify-between flex-wrap items-center mt-[2%]">
+                                        {weekDays.map((day,i) =>  <SingleDayStatus key={i}
+                                                                                day={day} />)}
+                                    </div>
                                 </div>
                             </div>
                             :
                             null
+                            
                     }
                 </div>
 

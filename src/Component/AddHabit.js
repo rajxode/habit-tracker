@@ -23,6 +23,7 @@ const AddHabit = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const newDate =  new Date().toString();
+        const weekStatus = Array(7).fill(null);
         
         const data = {
             id:'',
@@ -30,6 +31,7 @@ const AddHabit = () => {
             completedDays:0,
             createdOn:`${newDate.slice(4,15)}`,
             url: suggestionSelected ? `${suggestionSelected.url}` : 'https://freeiconshop.com/wp-content/uploads/edd/task-done-flat.png',
+            weekStatus:weekStatus
         };
 
         dispatch(addHabit(data));

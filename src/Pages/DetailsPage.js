@@ -25,7 +25,7 @@ const DetailsPage = () => {
                     </div>
                 </div>
 
-                <div className="w-full h-[90%] rounded shadow-sm flex bg-indigo-50 p-2">
+                <div className="w-full h-[90%] rounded shadow-sm flex bg-indigo-50 p-2 bg-fixed">
                     <HabitList />
 
                     <HabitStatus />         
