@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import HabitList from "../Component/HabitList";
+import HabitStatus from "../Component/HabitStatus";
 
 const DetailsPage = () => {
 
@@ -24,8 +25,10 @@ const DetailsPage = () => {
                     </div>
                 </div>
 
-                <div className="w-full h-[90%] rounded shadow-sm bg-indigo-50 p-2">
-                    Main container         
+                <div className="w-full h-[90%] rounded shadow-sm flex bg-indigo-50 p-2">
+                    <HabitList />
+
+                    <HabitStatus />         
                 </div>
 
             </div>

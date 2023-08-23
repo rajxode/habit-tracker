@@ -1,12 +1,33 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addHabit, habitSelector, setSuggestionSelected } from "../Redux/Reducer/habitReducer";
 
 const AddHabit = () => {
+    const dispatch = useDispatch();
+
     const [habitName,setHabitName] = useState('');
+    const { suggestionSelected } = useSelector(habitSelector);
+
+    useEffect(() => {
+        if(suggestionSelected){
+            setHabitName(suggestionSelected.habit);
+        }
+    },[suggestionSelected]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(habitName);
+        const newDate =  new Date().toString();
+
+        const data = {
+            id:'',
+            name:habitName,
+            completedDays:0,
+            createdOn:`${newDate.slice(4,15)}`
+        };
+
+        dispatch(addHabit(data));
+        dispatch(setSuggestionSelected(null));
     }
 
     return(
@@ -16,17 +37,20 @@ const AddHabit = () => {
             </h1>
             <div className="w-4/5 self-center border-t border-indigo-400">
                 <form onSubmit={handleSubmit}>
-                    <label for="habit-name"
+                    <label htmlFor="habit-name"
                             className="font-semibold">
                         Habit:
                     </label>
                     <br />
                     <input type="text" placeholder="Enter habit name..." 
                             id="habit-name" value={habitName}
-                            className="w-full h-8 rounded my-2" 
+                            className="w-full h-8 rounded my-2 px-1 font-semibold text-indigo-800" 
                             onChange={(e) => setHabitName(e.target.value)} required />
                     <br />
-                    <button type="submit" className="bg-[#7895CB] hover:bg-indigo-500 rounded shadow-md p-1 mt-2 text-white font-medium float-right">
+                    <button type="submit" className="bg-[#9b80fc] 
+                                                hover:bg-indigo-500 rounded 
+                                                shadow-md p-1 mt-2 text-white 
+                                                font-medium float-right">
                         ADD HABIT
                     </button>
                 </form>

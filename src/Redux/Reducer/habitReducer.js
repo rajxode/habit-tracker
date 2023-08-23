@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const initialState = { quote:{} }
+
+const initialState = { habits:[],    
+                    quote:{},
+                    suggestionSelected:null }
 
 
 export const quoteFetchThunk = createAsyncThunk(
@@ -17,6 +20,12 @@ const habitSlice = createSlice({
     name:'habitTracker',
     initialState,
     reducers:{
+        addHabit:(state,action) => {
+            state.habits = [...state.habits,action.payload];
+        },
+        setSuggestionSelected:(state,action)=> {
+            state.suggestionSelected = action.payload;
+        }
 
     },
     extraReducers:(builder)=>{
@@ -30,5 +39,7 @@ const habitSlice = createSlice({
 
 
 export const habitReducer = habitSlice.reducer;
+
+export const { addHabit, setSuggestionSelected } = habitSlice.actions;
 
 export const habitSelector = (state) => state.habitReducer;

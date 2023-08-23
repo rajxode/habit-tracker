@@ -15,7 +15,7 @@ const Suggestions = () => {
             </nav>
 
             <div className="w-full flex flex-col h-fill p-2 overflow-auto">
-                {habits.map((habit) => <ListItem key={1}
+                {habits.map((habit,i) => <ListItem key={i}
                                                 habit={habit} />)} 
             </div>
             

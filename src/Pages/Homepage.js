@@ -2,22 +2,33 @@ import { useEffect, useState } from "react";
 import AddHabit from "../Component/AddHabit";
 import Quote from "../Component/Quote";
 import Suggestions from "../Component/Suggestions";
-import { useDispatch } from "react-redux";
-import { quoteFetchThunk } from "../Redux/Reducer/habitReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { habitSelector, quoteFetchThunk, setSuggestionSelected } from "../Redux/Reducer/habitReducer";
 
 
 const Homepage = () => {
-    const [showAddHabit,setShowAddHabit] = useState(false);
-
     const dispatch = useDispatch();
+    const { suggestionSelected } = useSelector(habitSelector);
+
+    const [showAddHabit,setShowAddHabit] = useState(false);
 
     useEffect(() => {
         dispatch(quoteFetchThunk());
     },[]);
 
+    useEffect(() => {
+        if(suggestionSelected){
+            setShowAddHabit(true);
+        }
+    },[suggestionSelected]);
+
+
     const toggleAddHabit = (e) => {
         e.preventDefault();
         setShowAddHabit((prev) => !prev);
+        if(!showAddHabit){
+            dispatch(setSuggestionSelected(null));
+        }
     }
 
 
@@ -43,7 +54,7 @@ const Homepage = () => {
                             <AddHabit />
                         </div>
                     :
-                        <img src={require('../Assets/homeImage.jpg')} alt="image" className="w-full md:w-4/5 h-2/3 mb-2" />
+                        <img src={require('../Assets/homeImage.jpg')} alt="image" className="w-full md:w-4/5 h-2/3 mb-2 opacity-90" />
                     }
                     
                 </div>
