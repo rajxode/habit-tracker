@@ -12,7 +12,7 @@ const AddHabit = () => {
     const dispatch = useDispatch();
 
     const [habitName,setHabitName] = useState('');
-    const { suggestionSelected } = useSelector(habitSelector);
+    const { habits,suggestionSelected } = useSelector(habitSelector);
 
     useEffect(() => {
         if(suggestionSelected){
@@ -26,7 +26,7 @@ const AddHabit = () => {
         const weekStatus = Array(7).fill(null);
         
         const data = {
-            id:'',
+            id:habits.length,
             name:habitName,
             completedDays:0,
             createdOn:`${newDate.slice(4,15)}`,

@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
+import { DisplayImage } from "../../Data/DisplayImage";
 
 const initialState = { habits:[],    
                     quote:{},
                     suggestionSelected:null,
                     showStatus:null,
-                    weekStatus : [null,null,null,null,null,null,null] 
+                    displayImageUrl:'' 
                 }
 
 
@@ -32,13 +32,44 @@ const habitSlice = createSlice({
         },
         setShowStatus:(state,action) => {
             state.showStatus = action.payload;
+        },
+        toggleHabitStatus:(state,action) => {
+            const {index,status} = action.payload;
+            if(status){
+                if(state.showStatus.weekStatus[index]){
+                    return;
+                }
+                state.showStatus.completedDays++;
+            }
+            else if( status === false){
+                if(state.showStatus.weekStatus[index] === false){
+                    return;
+                }
+                else if(state.showStatus.weekStatus[index]){
+                    state.showStatus.completedDays--;
+                }
+            }
+            else{
+                if(state.showStatus.weekStatus[index] === null){
+                    return;
+                }
+                else if(state.showStatus.weekStatus[index]){
+                    state.showStatus.completedDays--;
+                }
+            }
+            
+            state.showStatus.weekStatus[index] = status;
+            const newHabits = state.habits.filter((habit) => habit.id !== state.showStatus.id);
+            state.habits = newHabits;
+            state.habits = [...state.habits, state.showStatus];
         }
     },
     extraReducers:(builder)=>{
         builder.addCase(quoteFetchThunk.fulfilled, (state,action) => {
             const data = [...action.payload];
-            const index = Math.trunc(Math.random() * 15);
+            const index = Math.trunc(Math.random() * 12);
             state.quote = {...data[index]};
+            state.displayImageUrl = DisplayImage[index].url;
         })
     }
 });
@@ -46,6 +77,6 @@ const habitSlice = createSlice({
 
 export const habitReducer = habitSlice.reducer;
 
-export const { addHabit, setSuggestionSelected, setShowStatus } = habitSlice.actions;
+export const { addHabit, setSuggestionSelected, setShowStatus, toggleHabitStatus } = habitSlice.actions;
 
 export const habitSelector = (state) => state.habitReducer;

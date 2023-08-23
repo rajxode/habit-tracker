@@ -8,7 +8,7 @@ import { habitSelector, quoteFetchThunk, setSuggestionSelected } from "../Redux/
 
 const Homepage = () => {
     const dispatch = useDispatch();
-    const { suggestionSelected } = useSelector(habitSelector);
+    const { displayImageUrl,suggestionSelected } = useSelector(habitSelector);
 
     const [showAddHabit,setShowAddHabit] = useState(false);
 
@@ -54,7 +54,7 @@ const Homepage = () => {
                             <AddHabit />
                         </div>
                     :
-                        <img src={require('../Assets/homeImage.jpg')} alt="image" className="hidden md:block w-full md:w-4/5 h-2/3 mb-2 opacity-90" />
+                        <img src={displayImageUrl} alt="image" className="hidden md:block w-full md:w-4/5 h-2/3 mb-2 opacity-90" />
                     }
 
                     <div className="md:hidden w-full h-fill rounded bg-[#f4faff] shadow-md ml-1 bg-fixed overflow-scroll">

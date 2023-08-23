@@ -1,8 +1,9 @@
 
 import { NavLink } from "react-router-dom";
-import { habitSelector, setShowStatus } from "../Redux/Reducer/habitReducer";
+import { habitSelector, setShowStatus, toggleHabitStatus } from "../Redux/Reducer/habitReducer";
 import { useDispatch, useSelector } from "react-redux";
 import SingleDayStatus from "./SingleDayStatus";
+import { toast } from "react-toastify";
 
 const CalculateDayOfWeek = (date) => {
     var days = new Array();
@@ -22,6 +23,13 @@ const HabitStatus = () => {
     const handleCloseClick = (e) => {
         e.preventDefault();
         dispatch(setShowStatus(null));
+    }
+
+    const toggleStatus = (index,status) => {
+        dispatch(toggleHabitStatus({index,status}));
+        if(status){
+            toast.success(`Task done for ${weekDays[index]}`);
+        }
     }
 
     return(
@@ -73,7 +81,10 @@ const HabitStatus = () => {
                                     <h1 className="w-full text-center text-lg font-semibold">Your Weekly Progress:</h1>
                                     <div className="w-full h-full p-2 flex flex-row justify-between flex-wrap items-center mt-[2%]">
                                         {weekDays.map((day,i) =>  <SingleDayStatus key={i}
-                                                                                day={day} />)}
+                                                                                day={day}
+                                                                                i={i}
+                                                                                status={showStatus.weekStatus[i]}
+                                                                                toggleStatus={toggleStatus} />)}
                                     </div>
                                 </div>
                             </div>
