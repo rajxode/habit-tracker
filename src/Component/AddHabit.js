@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHabit, habitSelector, setSuggestionSelected } from "../Redux/Reducer/habitReducer";
 
+// for toast notifications
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const AddHabit = () => {
     const dispatch = useDispatch();
 
@@ -18,16 +23,19 @@ const AddHabit = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const newDate =  new Date().toString();
-
+        
         const data = {
             id:'',
             name:habitName,
             completedDays:0,
-            createdOn:`${newDate.slice(4,15)}`
+            createdOn:`${newDate.slice(4,15)}`,
+            url: suggestionSelected ? `${suggestionSelected.url}` : 'https://freeiconshop.com/wp-content/uploads/edd/task-done-flat.png',
         };
 
         dispatch(addHabit(data));
         dispatch(setSuggestionSelected(null));
+        setHabitName('');
+        toast.success('New Habit is Added !!');
     }
 
     return(

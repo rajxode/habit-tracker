@@ -33,7 +33,7 @@ const Navbar = () => {
                             <li className="inline-block mx-2 text-slate-400">
                                 <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248)" } : undefined)}
                                         to='/detailspage'>
-                                    Details
+                                    Your Habits
                                 </NavLink>
                             </li>
                         </ul>
@@ -57,7 +57,7 @@ const Navbar = () => {
                                 <li className="p-1 text-slate-400">
                                     <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248)" } : undefined)}
                                                 to='/detailspage'>
-                                        Details
+                                        Your Habits
                                     </NavLink>
                                 </li>
                                 
