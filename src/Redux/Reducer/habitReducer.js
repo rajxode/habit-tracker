@@ -64,9 +64,9 @@ const habitSlice = createSlice({
         toggleHabitStatus:(state,action) => {
             // getting values passed in the function 
             // habitIndex = index of habit 
-            // index = index of day
+            // dayIndex = index of day
             // status = status of the habit {true = done, false = not done, null = pending}
-            const {habitIndex,index,status} = action.payload;
+            const {habitIndex,dayIndex,status} = action.payload;
             
             // this function works in case of "screen below medium width"
             // if showStaus doesn't has the current click habit then store the habit from habit list
@@ -77,7 +77,7 @@ const habitSlice = createSlice({
             // if the passed status if true, set habit as done
             if(status){
                 // if already done then return
-                if(state.showStatus.weekStatus[index]){
+                if(state.showStatus.weekStatus[dayIndex]){
                     return;
                 }
                 // increase the number of days on which task is done
@@ -86,11 +86,11 @@ const habitSlice = createSlice({
             // if the passed status is false, set habit as not done
             else if( status === false){
                 // if already not done, return
-                if(state.showStatus.weekStatus[index] === false){
+                if(state.showStatus.weekStatus[dayIndex] === false){
                     return;
                 }
                 // if the task was previously done
-                else if(state.showStatus.weekStatus[index]){
+                else if(state.showStatus.weekStatus[dayIndex]){
                     // decrease the number of task done days
                     state.showStatus.completedDays--;
                 }
@@ -98,18 +98,18 @@ const habitSlice = createSlice({
             // if passed status is null, set as pending habit
             else{
                 // if already pending return
-                if(state.showStatus.weekStatus[index] === null){
+                if(state.showStatus.weekStatus[dayIndex] === null){
                     return;
                 }
                 // if the previous status was done
-                else if(state.showStatus.weekStatus[index]){
+                else if(state.showStatus.weekStatus[dayIndex]){
                     // decrease the number of task done days
                     state.showStatus.completedDays--;
                 }
             }
             
             // set the status of task as passed in the function
-            state.showStatus.weekStatus[index] = status;
+            state.showStatus.weekStatus[dayIndex] = status;
             // update the habits array { remove the old value of habit }
             const newHabits = state.habits.filter((habit) => habit.id !== state.showStatus.id);
             state.habits = newHabits;
