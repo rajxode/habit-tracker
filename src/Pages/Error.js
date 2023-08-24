@@ -1,4 +1,7 @@
 
+// Error page { it will redirect you back to home page after 3 second }
+
+
 // react hooks
 import { useEffect } from "react";
 
