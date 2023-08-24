@@ -5,7 +5,7 @@
 // array habits
 // each element contains a id, habit = name of habit, url= an icon url for the respective habit
 
-export const habits = [
+export const SuggestedHabit = [
                 {
                     id:'1',
                     habit:'Read 1 page',
