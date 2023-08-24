@@ -39,7 +39,7 @@ const Homepage = () => {
                     <div className="w-full h-full flex flex-col items-center">
                         <Quote />
 
-                        <div className="w-full md:w-4/5 mb-1">
+                        <div className="w-full lg:w-4/5 mb-1">
                             <button className="bg-[#72a3e9] hover:bg-[#2e4b75] text-md p-[2px] px-[4px] float-right
                                                 rounded shadow-sm text-white"
                                     onClick={toggleAddHabit}>
@@ -54,7 +54,7 @@ const Homepage = () => {
                             <AddHabit />
                         </div>
                     :
-                        <img src={displayImageUrl} alt="image" className="hidden md:block w-full md:w-4/5 h-2/3 mb-2 opacity-90" />
+                        <img src={displayImageUrl} alt="image" className="hidden md:block w-full lg:w-4/5 md:h-full lg:h-2/3 mb-2 opacity-90" />
                     }
 
                     <div className="md:hidden w-full h-fill rounded bg-[#f4faff] shadow-md ml-1 bg-fixed overflow-scroll">

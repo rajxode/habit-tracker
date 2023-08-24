@@ -47,14 +47,14 @@ const Navbar = () => {
                         <div className="block sm:hid den w-full h-fit bg-white p-1 rounded-b shadow-md border-x-2 border-b-2">
                             <ul className="mx-0 px-1">
 
-                                <li className="border-b p-1 text-slate-400">
+                                <li className="border-b p-1 text-slate-400" onClick={toggleShowMenu}>
                                     <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248)" } : undefined)}
                                             to='/'>
                                         Home
                                     </NavLink>
                                 </li>
 
-                                <li className="p-1 text-slate-400">
+                                <li className="p-1 text-slate-400" onClick={toggleShowMenu}>
                                     <NavLink style={({ isActive }) => (isActive ? { color: "rgb(129 140 248)" } : undefined)}
                                                 to='/detailspage'>
                                         Your Habits

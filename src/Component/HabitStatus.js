@@ -1,9 +1,10 @@
 
 import { NavLink } from "react-router-dom";
-import { habitSelector, setShowStatus, toggleHabitStatus } from "../Redux/Reducer/habitReducer";
+import { habitSelector, setShowStatus } from "../Redux/Reducer/habitReducer";
 import { useDispatch, useSelector } from "react-redux";
-import SingleDayStatus from "./SingleDayStatus";
-import { toast } from "react-toastify";
+import WeekStatus from "./WeekStatus";
+import { hydrate } from "react-dom";
+
 
 const CalculateDayOfWeek = (date) => {
     var days = new Array();
@@ -25,15 +26,9 @@ const HabitStatus = () => {
         dispatch(setShowStatus(null));
     }
 
-    const toggleStatus = (index,status) => {
-        dispatch(toggleHabitStatus({index,status}));
-        if(status){
-            toast.success(`Task done for ${weekDays[index]}`);
-        }
-    }
 
     return(
-        <div className="w-2/3 h-full ml-1 flex flex-col p-1">
+        <div className="w-full md:w-2/3 h-full ml-1 flex flex-col p-1">
             <nav className="w-full p-1">
                 <NavLink to="/">
                     <button className="bg-indigo-400 hover:bg-indigo-500 float-right p-1 rounded text-white">
@@ -42,9 +37,9 @@ const HabitStatus = () => {
                 </NavLink>
             </nav>
 
-            <div className="w-full h-full mt-1 p-1 rounded flex flex-col">
+            <div className="w-full h-full mt-1 p-1 rounded flex flex-col bg-fixed overflow-scroll">
                 
-                <div className="w-full">
+                <div className="hidden md:block w-full">
                     
                     { !showStatus?
                         <h1 className="text-center text-2xl text-indigo-600 font-semibold">
@@ -59,39 +54,33 @@ const HabitStatus = () => {
                     }
                 </div>
 
-                <div className="w-full ">
+                <div className="hidden md:block w-full ">
                     {
                         showStatus ?
-                            <div className="w-full p-1 h-full">
-                                <button className="float-left bg-red-500 text-white px-[5px] rounded-md"
-                                        onClick={handleCloseClick}>
-                                            X
-                                </button>
-
-                                <h1 className="text-center text-2xl text-indigo-600 font-semibold">
-                                    <span className="text-black">Habit:</span> {showStatus.name}
-                                </h1>
-
-
-                                <h1 className="text-right text-md font-semibold text-stone-500">
-                                    <span>Added On:</span> {showStatus.createdOn}
-                                </h1>
-
-                                <div className="w-full h-fill mt-[5%] bg-fixed overflow-scroll">
-                                    <h1 className="w-full text-center text-lg font-semibold">Your Weekly Progress:</h1>
-                                    <div className="w-full h-full p-2 flex flex-row justify-between flex-wrap items-center mt-[2%]">
-                                        {weekDays.map((day,i) =>  <SingleDayStatus key={i}
-                                                                                day={day}
-                                                                                i={i}
-                                                                                status={showStatus.weekStatus[i]}
-                                                                                toggleStatus={toggleStatus} />)}
-                                    </div>
-                                </div>
-                            </div>
+                            <WeekStatus handleCloseClick={handleCloseClick}
+                                        showStatus={showStatus}
+                                        weekDays={weekDays} />
                             :
                             null
                             
                     }
+                </div>
+
+                <div className="block md:hidden w-full h-full">
+
+                    {
+                        habits.length === 0 ?
+                            <div>
+                                'Nothing in Your List'
+                            </div>
+                        :
+                        habits.map((habit,i) => <WeekStatus key={i}
+                                                        habitIndex = {i}
+                                                        handleCloseClick={hydrate}
+                                                        showStatus={habit}
+                                                        weekDays={weekDays} /> )
+                    }
+
                 </div>
 
             </div>

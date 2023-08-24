@@ -34,7 +34,11 @@ const habitSlice = createSlice({
             state.showStatus = action.payload;
         },
         toggleHabitStatus:(state,action) => {
-            const {index,status} = action.payload;
+            const {habitIndex,index,status} = action.payload;
+            if(state.showStatus === null){
+                state.showStatus = state.habits[habitIndex];
+            }
+
             if(status){
                 if(state.showStatus.weekStatus[index]){
                     return;

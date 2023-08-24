@@ -7,7 +7,7 @@ const Quote = () => {
     const {quote} = useSelector(habitSelector);
 
     return(
-        <div className="w-full sm:w-4/5 h-fit mt-4 mb-2 shadow-md rounded
+        <div className="w-full lg:w-4/5 h-fit mt-4 mb-2 shadow-md rounded
                         bg-indigo-400 text-white p-2">
             
             <h1 className="text-sm">

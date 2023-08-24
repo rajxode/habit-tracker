@@ -41,7 +41,7 @@ const AddHabit = () => {
     }
 
     return(
-        <div className="w-full sm:w-4/5 h-1/2 bg-[#C5DFF8] rounded shadow-md justify-self-end flex flex-col p-2">
+        <div className="w-full lg:w-4/5 h-1/2 bg-[#C5DFF8] rounded shadow-md justify-self-end flex flex-col p-2">
             <h1 className="text-indigo-700 text-lg font-semibold text-center mt-1">
                 Add Habit
             </h1>
