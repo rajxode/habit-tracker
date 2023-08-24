@@ -1,4 +1,9 @@
 
+// list of motivational image's Url
+// used to render a new image on each render of homepage
+
+
+// array of image url
 export const DisplayImage = [
     {
         url:'https://m.media-amazon.com/images/I/6148xVIsG4L._AC_UF894,1000_QL80_.jpg'

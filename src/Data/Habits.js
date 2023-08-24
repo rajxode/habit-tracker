@@ -1,4 +1,10 @@
 
+// to show a list of habits in suggestion list
+
+
+// array habits
+// each element contains a id, habit = name of habit, url= an icon url for the respective habit
+
 export const habits = [
                 {
                     id:'1',
