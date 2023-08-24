@@ -25,15 +25,7 @@ root.render(
       {/* for toast notification */}
       <ToastContainer 
         position="top-right"
-        autoClose={400}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored" />
+        autoClose={400}/>
       {/* render the app */}
       <App />
     </Provider>
